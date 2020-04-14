@@ -25,7 +25,8 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "vuetify"
     ]
   },
   "files": [
@@ -35,7 +36,9 @@
     "components/**/*.vue",
     "layouts/**/*.vue",
     "models/**/*.ts",
-    "pages/**/*.vue"
+    "pages/**/*.vue",
+    "store/**/*.ts",
+    "utils/**/*.ts"
   ],
   "exclude": [
     "node_modules",
