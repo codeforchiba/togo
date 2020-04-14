@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card :width="cardWidth" class="ma-4">
     <v-img :src="coverImagePath" height="300px" />
     <v-card-title>{{ shop.name }}</v-card-title>
     <v-card-text>
@@ -35,11 +35,15 @@ import Shop from '~/models/shop'
 
 @Component
 export default class ShopCard extends Vue {
-  @Prop({ type: Shop, required: true })
-  shop!: Shop;
+  @Prop({ required: true })
+  shop!: Shop
 
   get coverImagePath () {
     return `${this.shop.coverImagePath}`
+  }
+
+  get cardWidth () {
+    return this.$vuetify.breakpoint.smAndDown ? 300 : 400
   }
 }
 </script>
