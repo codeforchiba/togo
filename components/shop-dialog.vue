@@ -1,0 +1,147 @@
+<template>
+  <v-dialog v-model="open" :width="cardWidth" :fullscreen="mobile">
+    <template v-slot:activator="{ on }">
+      <v-btn text color="blue accent-2" v-on="on">
+        詳細
+      </v-btn>
+    </template>
+    <v-card>
+      <v-img :src="coverImagePath" height="300px" />
+      <v-card-title>{{ name }}</v-card-title>
+      <v-list-item v-if="businessHours">
+        <v-list-item-icon>
+          <v-icon>fas fa-clock</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <p v-html="businessHours" />
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon>fas fa-map-marker</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <p>{{ address }}</p>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="phone">
+        <v-list-item-icon>
+          <v-icon>fas fa-phone</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <p>{{ phone }}</p>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="menu">
+        <v-list-item-icon>
+          <v-icon>fas fa-comment-alt</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <p v-html="menu" />
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="notes">
+        <v-list-item-icon>
+          <v-icon>fas fa-comment-alt</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <p v-html="notes" />
+        </v-list-item-content>
+      </v-list-item>
+      <v-card-actions>
+        <v-btn text color="blue accent-2" @click="open = false">閉じる</v-btn>
+        <v-spacer />
+        <v-btn v-if="url" icon :href="url" target="_blank">
+          <v-icon>fas fa-globe</v-icon>
+        </v-btn>
+        <v-btn v-if="facebook" icon :href="facebook" target="_blank">
+          <v-icon>fab fa-facebook</v-icon>
+        </v-btn>
+        <v-btn v-if="twitter" icon :href="twitter" target="_blank">
+          <v-icon>fab fa-twitter</v-icon>
+        </v-btn>
+        <v-btn v-if="instagram" icon>
+          <v-icon>fab fa-instagram</v-icon>
+        </v-btn>
+        <v-btn v-if="line" icon>
+          <v-icon>fab fa-line</v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script lang="ts">
+import { Component, Prop } from 'nuxt-property-decorator'
+import Vue from 'vue'
+
+import Shop from '~/models/shop'
+
+@Component
+export default class ShopDialog extends Vue {
+  @Prop({ required: true })
+  shop!: Shop
+
+  open: boolean = false
+
+  get name () {
+    return this.shop.name
+  }
+
+  get address () {
+    return this.shop.address
+  }
+
+  get businessHours () {
+    return this.nl2br(this.shop.businessHours)
+  }
+
+  get phone () {
+    return this.shop.phone
+  }
+
+  get url () {
+    return this.shop.url
+  }
+
+  get facebook () {
+    return this.shop.facebook ? `https://facebook.com/${this.shop.facebook}` : undefined
+  }
+
+  get twitter () {
+    return this.shop.twitter ? `https://twitter.com/${this.shop.twitter}` : undefined
+  }
+
+  get instagram () {
+    return this.shop.instagram
+  }
+
+  get line () {
+    return this.shop.line
+  }
+
+  get notes () {
+    return this.nl2br(this.shop.notes)
+  }
+
+  get menu () {
+    return this.nl2br(this.shop.menus)
+  }
+
+  get coverImagePath () {
+    return this.shop.coverImagePath
+  }
+
+  get cardWidth () {
+    return this.mobile ? undefined : 600
+  }
+
+  get mobile () {
+    return this.$vuetify.breakpoint.xsOnly
+  }
+
+  nl2br (content: string | undefined) {
+    return content ? content.replace(/\n/g, '<br/>') : undefined
+  }
+}
+</script>
