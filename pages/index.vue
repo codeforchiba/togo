@@ -20,26 +20,10 @@
 import Vue from 'vue'
 import { Context } from '@nuxt/types'
 import { Component } from 'nuxt-property-decorator'
-import { Record, FieldSet, Attachment } from 'airtable'
 
 import AreaRow from '~/components/area-row.vue'
 import Shop from '~/models/shop'
 import ShopCard from '~/components/shop-card.vue'
-
-const retrieve = async function (context: Context, area: string): Promise<ReadonlyArray<Shop>> {
-  // @ts-ignore
-  const records = await context.$dataApi(area).select({ maxRecords: 5 }).all()
-  return records.map((record: Record<FieldSet>) => toShop(record))
-}
-
-const toShop = function (record: Record<FieldSet>): Shop {
-  return new Shop({
-    id: record.id,
-    name: record.fields.Name as string,
-    address: record.fields.Address as string,
-    coverImagePath: (record.fields['Cover Image'] as ReadonlyArray<Attachment>)[0].url
-  })
-}
 
 interface RecordMap {
   kemigawahama: ReadonlyArray<Shop>
@@ -58,9 +42,12 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
-    const kemigawahama = await retrieve(context, '検見川浜')
-    const kaihinmakuhari = await retrieve(context, '海浜幕張')
-    const inagekaigan = await retrieve(context, '稲毛海岸')
+    // @ts-ignore
+    const kemigawahama = await context.$dataApi.retrieve('検見川浜', { maxRecords: 5 })
+    // @ts-ignore
+    const kaihinmakuhari = await context.$dataApi.retrieve('海浜幕張', { maxRecords: 5 })
+    // @ts-ignore
+    const inagekaigan = await context.$dataApi.retrieve('稲毛海岸', { maxRecords: 5 })
 
     return { records: { kemigawahama, kaihinmakuhari, inagekaigan } }
   }
