@@ -42,7 +42,7 @@
       <v-col cols="12">
         <v-row justify="center">
           <a href="https://www.facebook.com/midoridaipantry" target="_blank">
-            <v-img :src="midoridaiPath" :max-width="200" />
+            <v-img :src="midoridaiPath" :max-width="180" />
           </a>
         </v-row>
       </v-col>
