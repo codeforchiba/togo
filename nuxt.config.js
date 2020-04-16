@@ -1,17 +1,27 @@
 import colors from 'vuetify/es5/util/colors'
 
+const title = 'お家で食べよう powered by Code for Chiba'
+const description = '近所のお店で買って、お家で食べよう！ 地域の飲食店を応援します！'
+
 export default {
   mode: 'universal',
   /*
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: 'お家で食べよう in %s',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: description },
+      { hid: 'og:site_name', property: 'og:site_name', content: title },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://togo.code4chiba.org/' },
+      { hid: 'og:title', property: 'og:title', content: title },
+      { hid: 'og:description', property: 'og:description', content: description },
+      { hid: 'og:image', property: 'og:image', content: 'https://togo.code4chiba.org/ogp.jpg' },
+      { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
+      { hid: 'twitter:site', property: 'twitter:site', content: '@code4chiba' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -64,6 +74,15 @@ export default {
         config.devtool = 'source-map'
       }
     }
+  },
+  generate: {
+    // TODO: 自動生成にしたい
+    routes: [
+      '/kemigawahama',
+      '/kaihinmakuhari',
+      '/inagekaigan',
+      '/nishichiba'
+    ]
   },
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,

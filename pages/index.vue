@@ -12,6 +12,7 @@
       <area-row code="kemigawahama" :shops="records.kemigawahama" />
       <area-row code="kaihinmakuhari" :shops="records.kaihinmakuhari" />
       <area-row code="inagekaigan" :shops="records.inagekaigan" />
+      <area-row code="nishichiba" :shops="records.nishichiba" />
     </client-only>
   </div>
 </template>
@@ -29,6 +30,7 @@ interface RecordMap {
   kemigawahama: ReadonlyArray<Shop>
   kaihinmakuhari: ReadonlyArray<Shop>
   inagekaigan: ReadonlyArray<Shop>
+  nishichiba: ReadonlyArray<Shop>
 }
 
 @Component({
@@ -36,6 +38,8 @@ interface RecordMap {
 })
 export default class Index extends Vue {
   records!: RecordMap
+
+  title: string = 'お家で食べよう powered by Code for Chiba'
 
   get logoPath () {
     return require('~/assets/images/logo.jpg')
@@ -48,8 +52,20 @@ export default class Index extends Vue {
     const kaihinmakuhari = await context.$dataApi.retrieve('海浜幕張', { maxRecords: 5 })
     // @ts-ignore
     const inagekaigan = await context.$dataApi.retrieve('稲毛海岸', { maxRecords: 5 })
+    // @ts-ignore
+    const nishichiba = await context.$dataApi.retrieve('西千葉', { maxRecords: 5 })
 
-    return { records: { kemigawahama, kaihinmakuhari, inagekaigan } }
+    return { records: { kemigawahama, kaihinmakuhari, inagekaigan, nishichiba } }
+  }
+
+  head () {
+    return {
+      titleTemplate: null,
+      title: this.title,
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: this.title }
+      ]
+    }
   }
 }
 </script>

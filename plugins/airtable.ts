@@ -22,6 +22,8 @@ class AirtableApiClient {
   }
 
   toShop (record: Record<FieldSet>): Shop {
+    const coverImage = this.detectImage((record.fields['Cover Image'] as ReadonlyArray<Attachment>))
+
     return new Shop({
       id: record.id,
       name: record.fields.Name as string,
@@ -33,10 +35,18 @@ class AirtableApiClient {
       twitter: record.fields.Twitter as string,
       instagram: record.fields.Instagram as string,
       line: record.fields.Line as string,
-      coverImagePath: (record.fields['Cover Image'] as ReadonlyArray<Attachment>)[0].url,
+      coverImagePath: coverImage ? coverImage.url : undefined,
       menus: record.fields.Menus as string,
       notes: record.fields.Notes as string
     })
+  }
+
+  detectImage (images: ReadonlyArray<Attachment>): Attachment | undefined {
+    if (images && images.length > 0) {
+      return images[0]
+    }
+
+    return undefined
   }
 }
 

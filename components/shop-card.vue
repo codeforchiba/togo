@@ -1,12 +1,19 @@
 <template>
   <v-card :width="cardWidth" class="ma-4">
-    <v-img :src="coverImagePath" height="300px" />
+    <v-img :src="coverImagePath" height="300px">
+      <template v-slot:placeholder>
+        <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
+          <v-icon x-large>fas fa-shopping-bag</v-icon>
+        </v-row>
+      </template>
+    </v-img>
     <v-card-title>{{ name }}</v-card-title>
     <v-list-item v-if="!mini && businessHours">
       <v-list-item-icon>
         <v-icon>fas fa-clock</v-icon>
       </v-list-item-icon>
       <v-list-item-content>
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <p v-html="businessHours" />
       </v-list-item-content>
     </v-list-item>
@@ -38,7 +45,7 @@
       <v-btn v-if="twitter" icon :href="twitter" target="_blank">
         <v-icon>fab fa-twitter</v-icon>
       </v-btn>
-      <v-btn v-if="instagram" icon>
+      <v-btn v-if="instagram" icon :href="instagram" target="_blank">
         <v-icon>fab fa-instagram</v-icon>
       </v-btn>
       <v-btn v-if="line" icon>
@@ -94,7 +101,7 @@ export default class ShopCard extends Vue {
   }
 
   get instagram () {
-    return this.shop.instagram
+    return this.shop.instagram ? `https://www.instagram.com/${this.shop.instagram}` : undefined
   }
 
   get line () {
