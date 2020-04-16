@@ -59,5 +59,11 @@ export default class Index extends Vue {
 
     return { area, shops }
   }
+
+  head () {
+    return {
+      title: this.name
+    }
+  }
 }
 </script>

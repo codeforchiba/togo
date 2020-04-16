@@ -37,6 +37,8 @@ interface RecordMap {
 export default class Index extends Vue {
   records!: RecordMap
 
+  title: string = 'お家で食べよう powered by Code for Chiba'
+
   get logoPath () {
     return require('~/assets/images/logo.jpg')
   }
@@ -50,6 +52,16 @@ export default class Index extends Vue {
     const inagekaigan = await context.$dataApi.retrieve('稲毛海岸', { maxRecords: 5 })
 
     return { records: { kemigawahama, kaihinmakuhari, inagekaigan } }
+  }
+
+  head () {
+    return {
+      titleTemplate: null,
+      title: this.title,
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: this.title }
+      ]
+    }
   }
 }
 </script>
