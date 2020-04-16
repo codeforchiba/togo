@@ -1,22 +1,34 @@
-# togo
+# お家で食べよう
 
-> My brilliant Nuxt.js project
+近所のテイクアウトできるお店を知って、食べて応援しよう。
 
-## Build Setup
+## 開発環境構築
+
+Node.js の実行環境を準備してください。必要なバージョンは `.node-version` を参照してください。
+
+Nuxt ベースで開発し、TypeScript を利用しています。
 
 ```bash
 # install dependencies
-$ yarn install
+$ npm install
 
 # serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
+$ npm run dev
 
 # generate static project
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+データの管理プラットフォームとして Airtable を利用しています。個別に招待してもらってください。
+
+実行するためには、2つの環境変数の設定が必要です。
+
+### AIRTABLE_API_KEY
+
+ユーザーごとに取得します。Account ページで生成してください。
+https://airtable.com/account
+
+### AIRTABLE_BASE_ID
+
+以下の URL から見ることができます。Workspace へ招待してもらってから、使っている Base の ID を取得してください。
+https://airtable.com/api
