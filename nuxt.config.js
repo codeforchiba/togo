@@ -80,7 +80,8 @@ export default {
     routes: [
       '/kemigawahama',
       '/kaihinmakuhari',
-      '/inagekaigan'
+      '/inagekaigan',
+      '/nishichiba'
     ]
   },
   env: {
