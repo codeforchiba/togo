@@ -1,20 +1,53 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="12" class="my-5">
-        <v-img :src="logoPath" alt="お家で食べよう" />
-      </v-col>
-      <v-col cols="12" class="text-center">
-        <p>近所のお店で買って、お家で食べよう。</p>
-      </v-col>
-    </v-row>
+  <v-container fluid>
+    <logo />
     <client-only>
       <area-row code="kemigawahama" :shops="records.kemigawahama" />
       <area-row code="kaihinmakuhari" :shops="records.kaihinmakuhari" />
       <area-row code="inagekaigan" :shops="records.inagekaigan" />
       <area-row code="nishichiba" :shops="records.nishichiba" />
     </client-only>
-  </div>
+    <v-row class="mt-5 red lighten-5">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        掲載を希望する飲食店の皆様へ
+      </v-col>
+      <v-col cols="12" class="text-left text-md-center">
+        <p>
+          掲載依頼は、フォームより受け付けております。以下のボタンよりフォームを開き、入力をお願いします(要Google アカウント)。
+        </p>
+        <p>
+          入力いただいた情報は、内容確認後、順次掲載させていただきます。
+        </p>
+      </v-col>
+      <v-col class="text-center py-5">
+        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" :href="formUrl" target="_blank">
+          掲載依頼フォームを開く
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row class="mt-5">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        運営団体
+      </v-col>
+      <v-col cols="12">
+        <v-row justify="center">
+          <a href="http://www.code4chiba.org/" target="_blank">
+            <v-img :src="cfcLogoPath" :max-width="small ? 200 : 300" />
+          </a>
+        </v-row>
+      </v-col>
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        情報協力
+      </v-col>
+      <v-col cols="12">
+        <v-row justify="center">
+          <a href="https://www.facebook.com/midoridaipantry" target="_blank">
+            <v-img :src="midoridaiPath" :max-width="200" />
+          </a>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -23,6 +56,7 @@ import { Context } from '@nuxt/types'
 import { Component } from 'nuxt-property-decorator'
 
 import AreaRow from '~/components/area-row.vue'
+import Logo from '~/components/logo.vue'
 import Shop from '~/models/shop'
 import ShopCard from '~/components/shop-card.vue'
 
@@ -34,15 +68,25 @@ interface RecordMap {
 }
 
 @Component({
-  components: { ShopCard, AreaRow }
+  components: { AreaRow, Logo, ShopCard }
 })
 export default class Index extends Vue {
   records!: RecordMap
 
   title: string = 'お家で食べよう powered by Code for Chiba'
 
-  get logoPath () {
-    return require('~/assets/images/logo.jpg')
+  formUrl: string = 'https://forms.gle/uQ5q8ecqPohBUkqu5'
+
+  get cfcLogoPath () {
+    return require('~/assets/images/cfc-with-text.png')
+  }
+
+  get midoridaiPath () {
+    return require('~/assets/images/midoridai.png')
+  }
+
+  get small () {
+    return this.$vuetify.breakpoint.smAndDown
   }
 
   async asyncData (context: Context): Promise<object> {
