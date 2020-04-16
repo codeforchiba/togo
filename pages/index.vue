@@ -73,7 +73,7 @@ interface RecordMap {
 export default class Index extends Vue {
   records!: RecordMap
 
-  title: string = 'お家で食べよう powered by Code for Chiba'
+  title: string = 'お家で食べよう in 千葉 powered by Code for Chiba'
 
   formUrl: string = 'https://forms.gle/uQ5q8ecqPohBUkqu5'
 

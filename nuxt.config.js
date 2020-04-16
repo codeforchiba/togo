@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-const title = 'お家で食べよう powered by Code for Chiba'
+const title = 'お家で食べよう in 千葉 powered by Code for Chiba'
 const description = '近所のお店で買って、お家で食べよう！ 地域の飲食店を応援します！'
 
 export default {
