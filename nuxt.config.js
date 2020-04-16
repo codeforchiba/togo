@@ -54,6 +54,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/gtm'
   ],
   /*
   ** Build configuration
@@ -117,5 +118,8 @@ export default {
       }
     },
     treeShake: true
+  },
+  gtm: {
+    id: 'GTM-KBCZNPM'
   }
 }

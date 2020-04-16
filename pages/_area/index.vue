@@ -1,15 +1,6 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="12" class="my-5">
-        <h1>
-          <v-img :src="logoPath" alt="お家で食べよう" />
-        </h1>
-      </v-col>
-      <v-col cols="12" class="my-5 display-1 text-center font-weight-bold">
-        <p><span class="pink-line">{{ name }}エリア</span></p>
-      </v-col>
-    </v-row>
+  <v-container>
+    <logo />
     <v-row>
       <v-col v-for="shop in shops" :key="shop.name" cols="12" sm="4">
         <shop-card :shop="shop" />
@@ -22,7 +13,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -33,10 +24,11 @@ import Vue from 'vue'
 import { areaStore } from '~/store'
 import Area from '~/models/area'
 import Shop from '~/models/shop'
+import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
 
 @Component({
-  components: { ShopCard }
+  components: { Logo, ShopCard }
 })
 export default class Index extends Vue {
   area!: Area

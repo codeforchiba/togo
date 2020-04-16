@@ -33,7 +33,7 @@
         <p>{{ phone }}</p>
       </v-list-item-content>
     </v-list-item>
-    <v-card-actions v-if="!mini">
+    <v-card-actions>
       <shop-dialog :shop="shop" />
       <v-spacer />
       <v-btn v-if="url" icon :href="url" target="_blank">
