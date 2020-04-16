@@ -42,7 +42,7 @@
       <v-col cols="12">
         <v-row justify="center">
           <a href="https://www.facebook.com/midoridaipantry" target="_blank">
-            <v-img :src="midoridaiPath" :max-width="200" />
+            <v-img :src="midoridaiPath" :max-width="180" />
           </a>
         </v-row>
       </v-col>
@@ -73,7 +73,7 @@ interface RecordMap {
 export default class Index extends Vue {
   records!: RecordMap
 
-  title: string = 'お家で食べよう powered by Code for Chiba'
+  title: string = 'お家で食べよう in 千葉 powered by Code for Chiba'
 
   formUrl: string = 'https://forms.gle/uQ5q8ecqPohBUkqu5'
 
