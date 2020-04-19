@@ -10,7 +10,9 @@
         <v-img :src="coverImagePath" height="300px">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
-              <v-icon x-large>fas fa-shopping-bag</v-icon>
+              <v-icon x-large>
+                fas fa-shopping-bag
+              </v-icon>
             </v-row>
           </template>
         </v-img>
@@ -61,7 +63,13 @@
         <v-row dense class="ma-3">
           <v-col v-for="(picture, i) in pictures" :key="i" cols="6">
             <v-card @click="openImageDialog(picture)">
-              <v-img :src="picture" :aspect-ratio="1" />
+              <v-img :src="picture" :aspect-ratio="1">
+                <template v-slot:placeholder>
+                  <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
+                    <v-progress-circular indeterminate />
+                  </v-row>
+                </template>
+              </v-img>
             </v-card>
           </v-col>
         </v-row>
@@ -88,9 +96,15 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="openImage" :fullscreen="mobile" :max-width="imageWidth">
+    <v-dialog v-model="openImage" :fullscreen="mobile" :max-width="imageWidth" content-class="image-dialog">
       <v-card :max-width="imageWidth">
-        <v-img :src="currentSource" contain :max-width="imageWidth" />
+        <v-img :src="currentSource" contain :max-width="imageWidth">
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
+              <v-progress-circular indeterminate />
+            </v-row>
+          </template>
+        </v-img>
         <v-card-actions>
           <v-spacer />
           <v-btn text color="blue accent-2" @click="openImage = false">
@@ -103,7 +117,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, Watch } from 'nuxt-property-decorator'
 import Vue from 'vue'
 
 import Shop from '~/models/shop'
@@ -181,6 +195,15 @@ export default class ShopDialog extends Vue {
 
   get mobile () {
     return this.$vuetify.breakpoint.xsOnly
+  }
+
+  @Watch('openImage')
+  onOpenImageDialog (value: boolean) {
+    if (value) {
+      Vue.nextTick(() => {
+        this.$vuetify.goTo(0, { duration: 0, container: '.image-dialog' })
+      })
+    }
   }
 
   openImageDialog (source: string) {

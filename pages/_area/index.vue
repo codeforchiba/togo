@@ -2,6 +2,11 @@
   <v-container>
     <logo />
     <v-row>
+      <v-col cols="12" class="my-5 display-2 text-center font-weight-bold" tag="h1">
+        <span class="pink-line">{{ name }}エリア</span>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col v-for="shop in shops" :key="shop.name" cols="12" sm="4">
         <shop-card :shop="shop" />
       </v-col>
