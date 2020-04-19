@@ -2,6 +2,7 @@ export default class Shop {
   readonly id?: string
   readonly name?: string
   readonly coverImagePath?: string
+  readonly pictures?: ReadonlyArray<string>
   readonly address?: string
   readonly businessHours?: string
   readonly phone?: string

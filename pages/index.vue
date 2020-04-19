@@ -7,7 +7,7 @@
       <area-row code="inagekaigan" :shops="records.inagekaigan" />
       <area-row code="nishichiba" :shops="records.nishichiba" />
     </client-only>
-    <v-row class="mt-5 red lighten-5">
+    <v-row class="mt-5 pb-5 red lighten-5">
       <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
         掲載を希望する飲食店の皆様へ
       </v-col>
@@ -42,7 +42,7 @@
       <v-col cols="12">
         <v-row justify="center">
           <a href="https://www.facebook.com/midoridaipantry" target="_blank">
-            <v-img :src="midoridaiPath" :max-width="180" />
+            <v-img :src="midoridaiPath" :max-width="160" />
           </a>
         </v-row>
       </v-col>

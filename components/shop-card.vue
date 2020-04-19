@@ -48,7 +48,7 @@
       <v-btn v-if="instagram" icon :href="instagram" target="_blank">
         <v-icon>fab fa-instagram</v-icon>
       </v-btn>
-      <v-btn v-if="line" icon>
+      <v-btn v-if="line" icon :href="line" target="_blank">
         <v-icon>fab fa-line</v-icon>
       </v-btn>
     </v-card-actions>
@@ -105,7 +105,11 @@ export default class ShopCard extends Vue {
   }
 
   get line () {
-    return this.shop.line
+    if (this.shop.line) {
+      return `https://line.me/R/ti/p/${encodeURIComponent(this.shop.line)}`
+    }
+
+    return undefined
   }
 
   get coverImagePath () {
