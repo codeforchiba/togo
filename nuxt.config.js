@@ -82,7 +82,9 @@ export default {
       '/kemigawahama',
       '/kaihinmakuhari',
       '/inagekaigan',
-      '/nishichiba'
+      '/nishichiba',
+      '/chibaminato',
+      '/chiba'
     ]
   },
   env: {

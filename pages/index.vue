@@ -2,10 +2,7 @@
   <v-container fluid>
     <logo />
     <client-only>
-      <area-row code="kemigawahama" :shops="records.kemigawahama" />
-      <area-row code="kaihinmakuhari" :shops="records.kaihinmakuhari" />
-      <area-row code="inagekaigan" :shops="records.inagekaigan" />
-      <area-row code="nishichiba" :shops="records.nishichiba" />
+      <area-row v-for="a in areas" :key="a.id" :code="a.id" :shops="records[a.id]" />
     </client-only>
     <v-row class="mt-5 pb-5 red lighten-5">
       <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
@@ -55,6 +52,7 @@ import Vue from 'vue'
 import { Context } from '@nuxt/types'
 import { Component } from 'nuxt-property-decorator'
 
+import { areaStore } from '~/store'
 import AreaRow from '~/components/area-row.vue'
 import Logo from '~/components/logo.vue'
 import Shop from '~/models/shop'
@@ -65,6 +63,8 @@ interface RecordMap {
   kaihinmakuhari: ReadonlyArray<Shop>
   inagekaigan: ReadonlyArray<Shop>
   nishichiba: ReadonlyArray<Shop>
+  chibaminato: ReadonlyArray<Shop>
+  chiba: ReadonlyArray<Shop>
 }
 
 @Component({
@@ -89,6 +89,10 @@ export default class Index extends Vue {
     return this.$vuetify.breakpoint.smAndDown
   }
 
+  get areas () {
+    return areaStore.areas
+  }
+
   async asyncData (context: Context): Promise<object> {
     // @ts-ignore
     const kemigawahama = await context.$dataApi.retrieve('検見川浜', { maxRecords: 5 })
@@ -98,8 +102,12 @@ export default class Index extends Vue {
     const inagekaigan = await context.$dataApi.retrieve('稲毛海岸', { maxRecords: 5 })
     // @ts-ignore
     const nishichiba = await context.$dataApi.retrieve('西千葉', { maxRecords: 5 })
+    // @ts-ignore
+    const chibaminato = await context.$dataApi.retrieve('千葉みなと', { maxRecords: 5 })
+    // @ts-ignore
+    const chiba = await context.$dataApi.retrieve('千葉', { maxRecords: 5 })
 
-    return { records: { kemigawahama, kaihinmakuhari, inagekaigan, nishichiba } }
+    return { records: { kemigawahama, kaihinmakuhari, inagekaigan, nishichiba, chibaminato, chiba } }
   }
 
   head () {
