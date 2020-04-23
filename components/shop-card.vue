@@ -1,6 +1,6 @@
 <template>
   <v-card :width="cardWidth" class="ma-4">
-    <v-img :src="coverImagePath" height="300px">
+    <v-img :src="coverImagePath" height="300">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
           <v-icon x-large>fas fa-shopping-bag</v-icon>
@@ -105,11 +105,7 @@ export default class ShopCard extends Vue {
   }
 
   get line () {
-    if (this.shop.line) {
-      return `https://line.me/R/ti/p/${encodeURIComponent(this.shop.line)}`
-    }
-
-    return undefined
+    return this.shop.line ? `https://line.me/R/ti/p/${encodeURIComponent(this.shop.line)}` : undefined
   }
 
   get coverImagePath () {

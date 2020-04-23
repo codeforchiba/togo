@@ -80,6 +80,7 @@ export default {
     // TODO: 自動生成にしたい
     routes: [
       '/kemigawahama',
+      '/kemigawa',
       '/kaihinmakuhari',
       '/inagekaigan',
       '/nishichiba',

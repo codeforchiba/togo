@@ -1,5 +1,5 @@
 import Airtable, { Attachment, FieldSet, Record } from 'airtable'
-import { Context, Plugin } from '@nuxt/types'
+import { Plugin } from '@nuxt/types'
 
 import Shop from '../models/shop'
 
@@ -60,10 +60,11 @@ class AirtableApiClient {
   }
 }
 
-const airtablePlugin: Plugin = (context) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const airtablePlugin: Plugin = (context, inject) => {
   // @ts-ignore
   const apiBase = new Airtable({ apiKey: process.env.dataApiKey }).base(process.env.baseId)
-  context.$dataApi = new AirtableApiClient(apiBase)
+  inject('dataApi', new AirtableApiClient(apiBase))
 }
 
 export default airtablePlugin

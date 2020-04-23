@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless>
+  <v-footer padless class="mt-5">
     <v-container fluid class="pa-0">
       <v-row>
         <v-col cols="12" class="pa-0">
