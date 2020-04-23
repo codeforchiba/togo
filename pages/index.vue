@@ -2,7 +2,11 @@
   <v-container fluid>
     <logo />
     <client-only>
-      <area-row v-for="a in areas" :key="a.id" :code="a.id" :shops="records[a.id]" />
+      <v-row class="mt-5 pb-5" justify="center">
+        <v-col v-for="a in records" :key="a.id" cols="12" sm="6" class="mb-5">
+          <area-card :area="a" />
+        </v-col>
+      </v-row>
     </client-only>
     <v-row class="mt-5 pb-5 red lighten-5">
       <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
@@ -53,25 +57,16 @@ import { Context } from '@nuxt/types'
 import { Component } from 'nuxt-property-decorator'
 
 import { areaStore } from '~/store'
-import AreaRow from '~/components/area-row.vue'
+import Area from '~/models/area'
+import AreaCard from '~/components/area-card.vue'
 import Logo from '~/components/logo.vue'
-import Shop from '~/models/shop'
 import ShopCard from '~/components/shop-card.vue'
 
-interface RecordMap {
-  kemigawahama: ReadonlyArray<Shop>
-  kaihinmakuhari: ReadonlyArray<Shop>
-  inagekaigan: ReadonlyArray<Shop>
-  nishichiba: ReadonlyArray<Shop>
-  chibaminato: ReadonlyArray<Shop>
-  chiba: ReadonlyArray<Shop>
-}
-
 @Component({
-  components: { AreaRow, Logo, ShopCard }
+  components: { AreaCard, Logo, ShopCard }
 })
 export default class Index extends Vue {
-  records!: RecordMap
+  records!: Array<Area>
 
   title: string = 'お家で食べよう in 千葉 powered by Code for Chiba'
 
@@ -89,25 +84,16 @@ export default class Index extends Vue {
     return this.$vuetify.breakpoint.smAndDown
   }
 
-  get areas () {
-    return areaStore.areas
-  }
-
   async asyncData (context: Context): Promise<object> {
-    // @ts-ignore
-    const kemigawahama = await context.$dataApi.retrieve('検見川浜', { maxRecords: 5 })
-    // @ts-ignore
-    const kaihinmakuhari = await context.$dataApi.retrieve('海浜幕張', { maxRecords: 5 })
-    // @ts-ignore
-    const inagekaigan = await context.$dataApi.retrieve('稲毛海岸', { maxRecords: 5 })
-    // @ts-ignore
-    const nishichiba = await context.$dataApi.retrieve('西千葉', { maxRecords: 5 })
-    // @ts-ignore
-    const chibaminato = await context.$dataApi.retrieve('千葉みなと', { maxRecords: 5 })
-    // @ts-ignore
-    const chiba = await context.$dataApi.retrieve('千葉', { maxRecords: 5 })
+    const areas = areaStore.areas
+    const records: Array<Area> = []
 
-    return { records: { kemigawahama, kaihinmakuhari, inagekaigan, nishichiba, chibaminato, chiba } }
+    for (const a of areas) {
+      const shops = await context.$dataApi.retrieve(a.name)
+      records.push({ id: a.id, name: a.name, shops })
+    }
+
+    return { records }
   }
 
   head () {
