@@ -3,7 +3,7 @@
     <logo />
     <client-only>
       <v-row class="mt-5 pb-5" justify="center">
-        <v-col v-for="a in records" :key="a.id" cols="12" sm="6" class="mb-5">
+        <v-col v-for="a in records" :key="a.id" cols="12" sm="6" md="5" class="mb-5">
           <area-card :area="a" />
         </v-col>
       </v-row>
@@ -48,6 +48,18 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-row class="mt-5">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        千葉市の飲食店応援プロジェクト
+      </v-col>
+      <v-col cols="12">
+        <v-row justify="center">
+          <a href="https://chiba1000samurai.com/" target="_blank">
+            <v-img :src="samuraiPath" :max-width="small ? 320 : 500" />
+          </a>
+        </v-row>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -80,6 +92,10 @@ export default class Index extends Vue {
     return require('~/assets/images/midoridai.png')
   }
 
+  get samuraiPath () {
+    return require('~/assets/images/1000samurai.jpg')
+  }
+
   get small () {
     return this.$vuetify.breakpoint.smAndDown
   }
@@ -89,7 +105,7 @@ export default class Index extends Vue {
     const records: Array<Area> = []
 
     for (const a of areas) {
-      const shops = await context.$dataApi.retrieve(a.name)
+      const shops = await context.app.$dataApi.retrieve(a.name)
       records.push({ id: a.id, name: a.name, shops })
     }
 

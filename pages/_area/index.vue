@@ -52,7 +52,7 @@ export default class Index extends Vue {
     const area = areaStore.areas.find(a => a.id === areaCode)
 
     // @ts-ignore
-    const shops = await context.$dataApi.retrieve(area.name)
+    const shops = await context.app.$dataApi.retrieve(area.name)
 
     return { area, shops }
   }
