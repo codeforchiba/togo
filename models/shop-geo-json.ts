@@ -45,6 +45,10 @@ class ShopGeoJson {
     this.features = shops
       .filter(shop => (typeof shop.lat === 'number') && (typeof shop.lng === 'number'))
       .map((shop) => {
+        // TODO: shop.lat shop.lng の型変換 or null ガード
+        // shopのほうがoptional型
+        // filterでガードしても型チェックで引っかかる。
+        // filterでガードして 非optional型にcastする?
         const geoJsonPointGeometry = new GeoJsonPointGeometry(1, 1)
         return new GeoJsonPointFeature(geoJsonPointGeometry, shop)
       })
