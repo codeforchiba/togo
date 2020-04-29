@@ -39,10 +39,6 @@ import areaData from '~/data/shop.json'
 export default class Index extends Vue {
   area!: Area
 
-  get logoPath () {
-    return require('~/assets/images/logo.jpg')
-  }
-
   get name () {
     return this.area.name
   }
@@ -72,6 +68,7 @@ export default class Index extends Vue {
     return {
       title: this.name,
       meta: [
+        { hid: 'og:title', property: 'og:title', content: `お家で食べよう in ${this.name} powered by Code for Chiba` },
         { hid: 'og:image', property: 'og:image', content: `${process.env.baseUrl}/ogp_${this.area.id}.jpg` }
       ]
     }
