@@ -54,14 +54,18 @@ export default class Index extends Vue {
       return context.payload
     }
 
-    const areaCode = context.params.area
-    const areaData = areaStore.areas.find(a => a.id === areaCode)
+    if (context.isDev) {
+      const areaCode = context.params.area
+      const areaData = areaStore.areas.find(a => a.id === areaCode)
 
-    // @ts-ignore
-    const shops = await context.app.$dataApi.retrieve(areaData.name)
-    const area: Area = { id: areaData!.id, name: areaData!.name, shops }
+      // @ts-ignore
+      const shops = await context.app.$dataApi.retrieve(areaData.name)
+      const area: Area = { id: areaData!.id, name: areaData!.name, shops }
 
-    return { area }
+      return { area }
+    }
+
+    return {}
   }
 
   head () {
