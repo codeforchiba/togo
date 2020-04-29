@@ -102,7 +102,7 @@ export default class Index extends Vue {
 
   async asyncData (context: Context): Promise<object> {
     if (context.payload) {
-      return context.payload
+      return { records: context.payload.records }
     }
 
     const areas = areaStore.areas
