@@ -66,7 +66,10 @@ export default class Index extends Vue {
 
   head () {
     return {
-      title: this.name
+      title: this.name,
+      meta: [
+        { hid: 'og:image', property: 'og:image', content: `https://togo.code4chiba.org/ogp_${this.area.id}.jpg` }
+      ]
     }
   }
 }
