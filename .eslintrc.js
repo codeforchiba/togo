@@ -10,6 +10,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'no-console': 'off',
     'max-len': [2, { code: 120 }],
     'vue/max-attributes-per-line': [
       2,

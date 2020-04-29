@@ -7,9 +7,7 @@ const description = '近所のお店で買って、お家で食べよう！ 地�
 
 const config: Configuration = {
   mode: 'universal',
-  /*
-  ** Headers of the page
-  */
+
   head: {
     titleTemplate: 'お家で食べよう in %s',
     meta: [
@@ -82,7 +80,8 @@ const config: Configuration = {
     extractCSS: true
   },
   generate: {
-    routes: buildRouteWithPayload
+    routes: buildRouteWithPayload,
+    devtools: true
   },
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,
