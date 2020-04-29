@@ -105,15 +105,19 @@ export default class Index extends Vue {
       return { records: context.payload.records }
     }
 
-    const areas = areaStore.areas
-    const records: Array<Area> = []
+    if (!context.isStatic) {
+      const areas = areaStore.areas
+      const records: Array<Area> = []
 
-    for (const a of areas) {
-      const shops = await context.app.$dataApi.retrieve(a.name)
-      records.push({ id: a.id, name: a.name, shops })
+      for (const a of areas) {
+        const shops = await context.app.$dataApi.retrieve(a.name)
+        records.push({ id: a.id, name: a.name, shops })
+      }
+
+      return { records }
     }
 
-    return { records }
+    return {}
   }
 
   head () {

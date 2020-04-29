@@ -19,7 +19,7 @@
     </v-img>
     <v-card-actions>
       <v-spacer />
-      <v-btn tile large color="red accent-2 white--text font-weight-bold" :to="areaPagePath">
+      <v-btn tile large color="red accent-2 white--text font-weight-bold" :to="areaPagePath" nuxt>
         店舗一覧
       </v-btn>
     </v-card-actions>

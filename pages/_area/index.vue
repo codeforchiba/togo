@@ -13,7 +13,7 @@
     </v-row>
     <v-row>
       <v-col class="text-center">
-        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" to="/">
+        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" to="/" nuxt>
           トップページに戻る
         </v-btn>
       </v-col>
@@ -54,14 +54,18 @@ export default class Index extends Vue {
       return { area: context.payload.area }
     }
 
-    const areaCode = context.params.area
-    const areaData = areaStore.areas.find(a => a.id === areaCode)
+    if (!context.isStatic) {
+      const areaCode = context.params.area
+      const areaData = areaStore.areas.find(a => a.id === areaCode)
 
-    // @ts-ignore
-    const shops = await context.app.$dataApi.retrieve(areaData.name)
-    const area: Area = { id: areaData!.id, name: areaData!.name, shops }
+      // @ts-ignore
+      const shops = await context.app.$dataApi.retrieve(areaData.name)
+      const area: Area = { id: areaData!.id, name: areaData!.name, shops }
 
-    return { area }
+      return { area }
+    }
+
+    return {}
   }
 
   head () {
