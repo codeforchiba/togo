@@ -72,7 +72,7 @@ export default class Index extends Vue {
     return {
       title: this.name,
       meta: [
-        { hid: 'og:image', property: 'og:image', content: `https://togo.code4chiba.org/ogp_${this.area.id}.jpg` }
+        { hid: 'og:image', property: 'og:image', content: `${process.env.baseUrl}/ogp_${this.area.id}.jpg` }
       ]
     }
   }
