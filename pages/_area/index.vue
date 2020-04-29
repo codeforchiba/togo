@@ -7,6 +7,12 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="12">
+        <!--  props でなく $attrs で渡ってしまう。。。-->
+        <area-google-map :shops="shops" />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col v-for="shop in shops" :key="shop.name" cols="12" sm="4">
         <shop-card :shop="shop" />
       </v-col>
@@ -30,11 +36,12 @@ import { areaStore } from '~/store'
 import Area from '~/models/area'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
+import AreaGoogleMap from '~/components/area-google-map.vue'
 
 import areaData from '~/data/shop.json'
 
 @Component({
-  components: { Logo, ShopCard }
+  components: { AreaGoogleMap, Logo, ShopCard }
 })
 export default class Index extends Vue {
   area!: Area
