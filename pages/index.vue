@@ -101,6 +101,10 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
+    if (context.payload) {
+      return context.payload
+    }
+
     const areas = areaStore.areas
     const records: Array<Area> = []
 

@@ -28,7 +28,6 @@ import Vue from 'vue'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
-import Shop from '~/models/shop'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
 
@@ -37,7 +36,6 @@ import ShopCard from '~/components/shop-card.vue'
 })
 export default class Index extends Vue {
   area!: Area
-  shops!: ReadonlyArray<Shop>
 
   get logoPath () {
     return require('~/assets/images/logo.jpg')
@@ -47,14 +45,23 @@ export default class Index extends Vue {
     return this.area.name
   }
 
+  get shops () {
+    return this.area.shops
+  }
+
   async asyncData (context: Context): Promise<object> {
+    if (context.payload) {
+      return context.payload
+    }
+
     const areaCode = context.params.area
-    const area = areaStore.areas.find(a => a.id === areaCode)
+    const areaData = areaStore.areas.find(a => a.id === areaCode)
 
     // @ts-ignore
-    const shops = await context.app.$dataApi.retrieve(area.name)
+    const shops = await context.app.$dataApi.retrieve(areaData.name)
+    const area: Area = { id: areaData!.id, name: areaData!.name, shops }
 
-    return { area, shops }
+    return { area }
   }
 
   head () {

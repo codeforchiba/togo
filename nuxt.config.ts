@@ -1,9 +1,11 @@
+import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
+import buildRouteWithPayload from './utils/preload'
 
 const title = 'お家で食べよう in 千葉 powered by Code for Chiba'
 const description = '近所のお店で買って、お家で食べよう！ 地域の飲食店を応援します！'
 
-export default {
+const config: Configuration = {
   mode: 'universal',
   /*
   ** Headers of the page
@@ -41,20 +43,21 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/airtable.ts'
+    '~/plugins/airtable'
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     '@nuxt/typescript-build',
+    '@nuxtjs/gtm',
     '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/gtm'
+    '@nuxtjs/axios'
   ],
   /*
   ** Build configuration
@@ -74,19 +77,12 @@ export default {
       if (isDev && isClient) {
         config.devtool = 'source-map'
       }
-    }
+    },
+
+    extractCSS: true
   },
   generate: {
-    // TODO: 自動生成にしたい
-    routes: [
-      '/kemigawahama',
-      '/kemigawa',
-      '/kaihinmakuhari',
-      '/inagekaigan',
-      '/nishichiba',
-      '/chibaminato',
-      '/chiba'
-    ]
+    routes: buildRouteWithPayload
   },
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,
@@ -126,3 +122,5 @@ export default {
     id: 'GTM-KBCZNPM'
   }
 }
+
+export default config
