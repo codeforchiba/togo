@@ -39,13 +39,13 @@ class GeoJsonPointFeature implements GeoJsonFeature {
 
 class ShopGeoJson {
   readonly type: string = 'FeatureCollection';
-  features: Array<GeoJsonFeature> = [];
+  features: ReadonlyArray<GeoJsonFeature> = [];
 
-  constructor (shops: Array<Shop>) {
+  constructor (shops: ReadonlyArray<Shop>) {
     this.features = shops
       .filter(shop => (typeof shop.lat === 'number') && (typeof shop.lng === 'number'))
       .map((shop) => {
-        const geoJsonPointGeometry = new GeoJsonPointGeometry(shop.lat, shop.lng)
+        const geoJsonPointGeometry = new GeoJsonPointGeometry(1, 1)
         return new GeoJsonPointFeature(geoJsonPointGeometry, shop)
       })
   }
