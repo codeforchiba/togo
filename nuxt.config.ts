@@ -5,6 +5,7 @@ import area from './data/area.json'
 
 const title = 'お家で食べよう in 千葉 powered by Code for Chiba'
 const description = '近所のお店で買って、お家で食べよう！ 地域の飲食店を応援します！'
+const baseUrl = 'https://togo.code4chiba.org'
 
 const config: Configuration = {
   mode: 'universal',
@@ -17,10 +18,10 @@ const config: Configuration = {
       { hid: 'description', name: 'description', content: description },
       { hid: 'og:site_name', property: 'og:site_name', content: title },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'https://togo.code4chiba.org/' },
+      { hid: 'og:url', property: 'og:url', content: `${baseUrl}/` },
       { hid: 'og:title', property: 'og:title', content: title },
       { hid: 'og:description', property: 'og:description', content: description },
-      { hid: 'og:image', property: 'og:image', content: 'https://togo.code4chiba.org/ogp.jpg' },
+      { hid: 'og:image', property: 'og:image', content: `${baseUrl}/ogp.jpg` },
       { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
       { hid: 'twitter:site', property: 'twitter:site', content: '@code4chiba' }
     ],
@@ -88,7 +89,8 @@ const config: Configuration = {
   },
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,
-    baseId: process.env.AIRTABLE_BASE_ID
+    baseId: process.env.AIRTABLE_BASE_ID,
+    baseUrl: baseUrl
   },
   typescript: {
     typeCheck: {
