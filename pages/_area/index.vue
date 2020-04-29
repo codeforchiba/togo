@@ -28,16 +28,16 @@ import Vue from 'vue'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
-import Shop from '~/models/shop'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
+
+import areaData from '~/data/shop.json'
 
 @Component({
   components: { Logo, ShopCard }
 })
 export default class Index extends Vue {
   area!: Area
-  shops!: ReadonlyArray<Shop>
 
   get logoPath () {
     return require('~/assets/images/logo.jpg')
@@ -47,19 +47,33 @@ export default class Index extends Vue {
     return this.area.name
   }
 
+  get shops () {
+    return this.area.shops
+  }
+
   async asyncData (context: Context): Promise<object> {
     const areaCode = context.params.area
-    const area = areaStore.areas.find(a => a.id === areaCode)
 
-    // @ts-ignore
-    const shops = await context.app.$dataApi.retrieve(area.name)
+    if (context.isDev) {
+      const areaData = areaStore.areas.find(a => a.id === areaCode)
 
-    return { area, shops }
+      // @ts-ignore
+      const shops = await context.app.$dataApi.retrieve(areaData.name)
+      const area: Area = { id: areaData!.id, name: areaData!.name, shops }
+
+      return { area }
+    } else {
+      const area = areaData.find(a => a.id === areaCode)
+      return { area }
+    }
   }
 
   head () {
     return {
-      title: this.name
+      title: this.name,
+      meta: [
+        { hid: 'og:image', property: 'og:image', content: `https://togo.code4chiba.org/ogp_${this.area.id}.jpg` }
+      ]
     }
   }
 }

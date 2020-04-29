@@ -8,6 +8,7 @@
       "esnext.asynciterable",
       "dom"
     ],
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -26,6 +27,7 @@
     "types": [
       "@types/node",
       "@nuxt/types",
+      "@nuxtjs/axios",
       "vuetify"
     ]
   },
@@ -36,7 +38,9 @@
     "components/**/*.vue",
     "layouts/**/*.vue",
     "models/**/*.ts",
+    "modules/**/*.ts",
     "pages/**/*.vue",
+    "plugins/**/*.ts",
     "store/**/*.ts",
     "utils/**/*.ts"
   ],

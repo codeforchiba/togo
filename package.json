@@ -5,13 +5,16 @@
   "author": "URAMOTO Kazunori",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore ."
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "server": "http-server ./dist -p 8080"
   },
   "dependencies": {
+    "@nuxt/typescript-runtime": "^0.4.6",
+    "@nuxtjs/axios": "^5.10.1",
     "@nuxtjs/gtm": "^2.2.3",
     "airtable": "^0.8.1",
     "lodash": "^4.17.15",
@@ -25,10 +28,14 @@
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/vuetify": "^1.0.0",
     "@types/airtable": "^0.5.7",
+    "@types/fs-extra": "^8.1.0",
     "@types/lodash": "^4.14.150",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
+    "fs-extra": "^9.0.0",
+    "http-server": "^0.12.3",
+    "nuxt-payload-extractor": "^1.0.0",
     "vuex-module-decorators": "^0.16.1"
   }
 }

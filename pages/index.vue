@@ -74,6 +74,8 @@ import AreaCard from '~/components/area-card.vue'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
 
+import areaData from '~/data/shop.json'
+
 @Component({
   components: { AreaCard, Logo, ShopCard }
 })
@@ -101,15 +103,19 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
-    const areas = areaStore.areas
-    const records: Array<Area> = []
+    if (context.isDev) {
+      const areas = areaStore.areas
+      const records: Array<Area> = []
 
-    for (const a of areas) {
-      const shops = await context.app.$dataApi.retrieve(a.name)
-      records.push({ id: a.id, name: a.name, shops })
+      for (const a of areas) {
+        const shops = await context.app.$dataApi.retrieve(a.name)
+        records.push({ id: a.id, name: a.name, shops })
+      }
+
+      return { records }
+    } else {
+      return { records: areaData }
     }
-
-    return { records }
   }
 
   head () {
