@@ -1,6 +1,6 @@
 import { Plugin } from '@nuxt/types'
 import Airtable from 'airtable'
-import AirtableApiClient from '~/modules/airtable-api-client'
+import AirtableApiClient from '~/utils/airtable-api-client'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const airtablePlugin: Plugin = (context, inject) => {

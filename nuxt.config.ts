@@ -1,6 +1,7 @@
 import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
-import buildRouteWithPayload from './utils/preload'
+
+import area from './data/area.json'
 
 const title = 'お家で食べよう in 千葉 powered by Code for Chiba'
 const description = '近所のお店で買って、お家で食べよう！ 地域の飲食店を応援します！'
@@ -55,7 +56,8 @@ const config: Configuration = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '~/modules/preload'
   ],
   /*
   ** Build configuration
@@ -80,8 +82,9 @@ const config: Configuration = {
     extractCSS: true
   },
   generate: {
-    routes: buildRouteWithPayload,
-    devtools: true
+    routes () {
+      return area.map((a: any) => { return `/${a.id}` })
+    }
   },
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,

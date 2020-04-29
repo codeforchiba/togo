@@ -13,7 +13,7 @@
     </v-row>
     <v-row>
       <v-col class="text-center">
-        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" to="/" nuxt>
+        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" to="/">
           トップページに戻る
         </v-btn>
       </v-col>
@@ -30,6 +30,8 @@ import { areaStore } from '~/store'
 import Area from '~/models/area'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
+
+import areaData from '~/data/shop.json'
 
 @Component({
   components: { Logo, ShopCard }
@@ -50,12 +52,9 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
-    if (context.payload) {
-      return { area: context.payload.area }
-    }
+    const areaCode = context.params.area
 
-    if (!context.isStatic) {
-      const areaCode = context.params.area
+    if (context.isDev) {
       const areaData = areaStore.areas.find(a => a.id === areaCode)
 
       // @ts-ignore
@@ -63,9 +62,10 @@ export default class Index extends Vue {
       const area: Area = { id: areaData!.id, name: areaData!.name, shops }
 
       return { area }
+    } else {
+      const area = areaData.find(a => a.id === areaCode)
+      return { area }
     }
-
-    return {}
   }
 
   head () {
