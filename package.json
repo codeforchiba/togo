@@ -16,6 +16,7 @@
     "@nuxt/typescript-runtime": "^0.4.6",
     "@nuxtjs/axios": "^5.10.1",
     "@nuxtjs/gtm": "^2.2.3",
+    "@types/geojson": "^7946.0.7",
     "airtable": "^0.8.1",
     "lodash": "^4.17.15",
     "nuxt": "^2.0.0",
