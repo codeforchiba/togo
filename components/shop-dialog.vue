@@ -16,7 +16,12 @@
             </v-row>
           </template>
         </v-img>
-        <v-card-title>{{ name }}</v-card-title>
+        <v-card-title>
+          <v-icon v-if="official" dense color="yellow accent-4" class="mr-2">
+            fas fa-crown
+          </v-icon>
+          {{ name }}
+        </v-card-title>
         <v-list-item v-if="businessHours">
           <v-list-item-icon>
             <v-icon>fas fa-clock</v-icon>
@@ -175,6 +180,10 @@ export default class ShopDialog extends Vue {
 
   get menu () {
     return this.nl2br(this.shop.menus)
+  }
+
+  get official () {
+    return this.shop.official
   }
 
   get coverImagePath () {

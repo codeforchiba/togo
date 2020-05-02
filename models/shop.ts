@@ -13,6 +13,7 @@ export default class Shop {
   readonly line?: string
   readonly menus?: string
   readonly notes?: string
+  readonly official?: boolean
 
   constructor (object?: Partial<Shop>) {
     Object.assign(this, object)
