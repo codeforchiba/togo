@@ -25,6 +25,7 @@
 import { Component } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
 import Vue from 'vue'
+import { sortBy } from 'lodash'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
@@ -44,7 +45,7 @@ export default class Index extends Vue {
   }
 
   get shops () {
-    return this.area.shops
+    return sortBy(this.area.shops, s => s.official)
   }
 
   async asyncData (context: Context): Promise<object> {

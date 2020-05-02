@@ -3,11 +3,18 @@
     <v-img :src="coverImagePath" height="300">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
-          <v-icon x-large>fas fa-shopping-bag</v-icon>
+          <v-icon x-large>
+            fas fa-shopping-bag
+          </v-icon>
         </v-row>
       </template>
     </v-img>
-    <v-card-title>{{ name }}</v-card-title>
+    <v-card-title>
+      <v-icon v-if="official" dense color="yellow accent-4" class="mr-2">
+        fas fa-crown
+      </v-icon>
+      {{ name }}
+    </v-card-title>
     <v-list-item v-if="!mini && businessHours">
       <v-list-item-icon>
         <v-icon>fas fa-clock</v-icon>
@@ -106,6 +113,10 @@ export default class ShopCard extends Vue {
 
   get line () {
     return this.shop.line ? `https://line.me/R/ti/p/${encodeURIComponent(this.shop.line)}` : undefined
+  }
+
+  get official () {
+    return this.shop.official
   }
 
   get coverImagePath () {

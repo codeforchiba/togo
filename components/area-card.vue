@@ -2,18 +2,30 @@
   <v-card>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="headline">{{ name }}エリア</v-list-item-title>
+        <v-list-item-title class="headline">
+          {{ name }}エリア
+          <v-chip class="ml-2" color="indigo" text-color="white">
+            {{ shopCount }}
+          </v-chip>
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
     <v-img :src="coverImage" :height="imageHeight">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
-          <v-icon x-large>fas fa-shopping-bag</v-icon>
+          <v-icon x-large>
+            fas fa-shopping-bag
+          </v-icon>
         </v-row>
       </template>
       <v-row align="end" class="fill-height">
         <v-col class="py-0 frosted-glass text-center">
-          <v-card-title>{{ shopName }}</v-card-title>
+          <v-card-title>
+            <v-icon v-if="official" dense color="yellow accent-4" class="mr-2">
+              fas fa-crown
+            </v-icon>
+            {{ shopName }}
+          </v-card-title>
         </v-col>
       </v-row>
     </v-img>
@@ -45,8 +57,13 @@ export default class AreaRow extends Vue {
     return this.area.name || ''
   }
 
+  get shopCount () {
+    return this.area.shops.length
+  }
+
   get shop () {
-    return sample(this.area.shops)!
+    const officials = this.area.shops.filter(s => s.official)
+    return officials.length > 0 ? sample(officials)! : sample(this.area.shops)!
   }
 
   get shopName () {
@@ -55,6 +72,10 @@ export default class AreaRow extends Vue {
 
   get coverImage () {
     return this.shop.coverImagePath
+  }
+
+  get official () {
+    return this.shop.official
   }
 
   get imageHeight () {
