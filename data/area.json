@@ -1,9 +1,11 @@
 [
   { "id": "kaihinmakuhari", "name": "海浜幕張" },
+  { "id": "makuhari", "name": "幕張" },
   { "id": "kemigawahama", "name": "検見川浜" },
   { "id": "kemigawa", "name": "検見川" },
   { "id": "inagekaigan", "name": "稲毛海岸" },
   { "id": "chibaminato", "name": "千葉みなと" },
   { "id": "nishichiba", "name": "西千葉" },
-  { "id": "chiba", "name": "千葉" }
+  { "id": "chiba", "name": "千葉" },
+  { "id": "makuharihongo", "name": "幕張本郷"}
 ]
