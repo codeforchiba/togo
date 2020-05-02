@@ -7,5 +7,6 @@
   { "id": "chibaminato", "name": "千葉みなと" },
   { "id": "nishichiba", "name": "西千葉" },
   { "id": "chiba", "name": "千葉" },
-  { "id": "makuharihongo", "name": "幕張本郷"}
+  { "id": "makuharihongo", "name": "幕張本郷"},
+  { "id": "mitsuwadai", "name": "みつわ台" }
 ]
