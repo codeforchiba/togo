@@ -3,8 +3,8 @@
     <v-col cols="12" sm="10" md="8" lg="6" class="my-5" tag="h1">
       <v-img :src="logoPath" alt="お家で食べよう" />
     </v-col>
-    <v-col cols="12" class="text-center">
-      <p>近所のお店で買って、お家で食べよう。</p>
+    <v-col cols="12" class="text-center headline">
+      <p>近所のお店で買って、お家で食べよう！</p>
     </v-col>
   </v-row>
 </template>
