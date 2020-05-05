@@ -2,13 +2,17 @@
   <v-card>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="headline">{{ name }}エリア</v-list-item-title>
+        <v-list-item-title class="headline">
+          {{ name }}エリア
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
     <v-img :src="coverImage" :height="imageHeight">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
-          <v-icon x-large>fas fa-shopping-bag</v-icon>
+          <v-icon x-large>
+            fas fa-shopping-bag
+          </v-icon>
         </v-row>
       </template>
       <v-row align="end" class="fill-height">

@@ -3,7 +3,9 @@
     <v-img :src="coverImagePath" height="300">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0 blue-grey lighten-4" justify="center" align="center">
-          <v-icon x-large>fas fa-shopping-bag</v-icon>
+          <v-icon x-large>
+            fas fa-shopping-bag
+          </v-icon>
         </v-row>
       </template>
     </v-img>
