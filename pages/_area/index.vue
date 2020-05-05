@@ -8,8 +8,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <!--  props でなく $attrs で渡ってしまう。。。-->
-        <area-google-map :shops="shops" />
+        <area-google-map :shops="shops" :api-key="apiKey" />
       </v-col>
     </v-row>
     <v-row>
@@ -34,6 +33,7 @@ import Vue from 'vue'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
+import Shop from '~/models/shop'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
 import AreaGoogleMap from '~/components/area-google-map.vue'
@@ -44,6 +44,7 @@ import areaData from '~/data/shop.json'
   components: { AreaGoogleMap, Logo, ShopCard }
 })
 export default class Index extends Vue {
+  apiKey!: String
   area!: Area
 
   get logoPath () {
@@ -59,6 +60,7 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
+    const apiKey = context.env.googleMapsApiKey
     const areaCode = context.params.area
 
     if (context.isDev) {
@@ -68,10 +70,10 @@ export default class Index extends Vue {
       const shops = await context.app.$dataApi.retrieve(areaData.name)
       const area: Area = { id: areaData!.id, name: areaData!.name, shops }
 
-      return { area }
+      return { apiKey, area }
     } else {
       const area = areaData.find(a => a.id === areaCode)
-      return { area }
+      return { apiKey, area }
     }
   }
 
