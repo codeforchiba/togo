@@ -7,7 +7,7 @@ class ShopFeature implements Feature<Point, Shop> {
   readonly properties: Shop
 
   constructor (lat: number, lng: number, properties: Shop) {
-    this.geometry = { type: 'Point', coordinates: [lat, lng] }
+    this.geometry = { type: 'Point', coordinates: [lng, lat] }
     this.properties = properties
   }
 }

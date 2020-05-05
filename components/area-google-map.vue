@@ -12,10 +12,12 @@ import { Component, Prop } from 'nuxt-property-decorator'
 import { MapLoaderOptions } from '@googlemaps/map-loader/src/map-loader'
 import Shop from '~/models/shop'
 import ShopGeoJson from '~/models/shop-geo-json'
+import Area from '~/models/area'
 
 @Component
 export default class AreaGoogleMap extends Vue {
   @Prop({ required: true }) readonly shops!: ReadonlyArray<Shop>
+  @Prop({ required: true }) readonly area!: Area
   @Prop({ required: true }) readonly apiKey!: String
 
   mounted () {
@@ -27,13 +29,9 @@ export default class AreaGoogleMap extends Vue {
   }
 
   initializeMap () {
-    // TODO: centerをエリアごとに設定
     const mapOptions = {
-      center: {
-        lat: 35.648976,
-        lng: 140.043184
-      },
-      zoom: 14
+      center: this.area.center,
+      zoom: this.area.zoom
     } as google.maps.MapOptions
 
     const mapLoaderOptions = {
