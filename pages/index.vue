@@ -109,7 +109,7 @@ export default class Index extends Vue {
 
       for (const a of areas) {
         const shops = await context.app.$dataApi.retrieve(a.name)
-        records.push({ id: a.id, name: a.name, shops })
+        records.push({ id: a.id, name: a.name, lat: a.lat, lng: a.lng, zoom: a.zoom, shops })
       }
 
       return { records }
