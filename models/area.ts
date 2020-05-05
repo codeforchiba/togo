@@ -11,8 +11,4 @@ export default class Area {
   constructor (object?: Partial<Area>) {
     Object.assign(this, object)
   }
-
-  get center () {
-    return { lat: this.lat, lng: this.lng }
-  }
 }

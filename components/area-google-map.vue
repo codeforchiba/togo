@@ -30,7 +30,7 @@ export default class AreaGoogleMap extends Vue {
 
   initializeMap () {
     const mapOptions = {
-      center: this.area.center,
+      center: { lat: this.area.lat, lng: this.area.lng },
       zoom: this.area.zoom
     } as google.maps.MapOptions
 
