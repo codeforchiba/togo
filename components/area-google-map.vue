@@ -7,9 +7,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { GoogleMap } from '@googlemaps/map-loader'
+import { Loader, LoaderOptions } from '@googlemaps/js-api-loader'
 import { Component, Prop } from 'nuxt-property-decorator'
-import { MapLoaderOptions } from '@googlemaps/map-loader/src/map-loader'
 import ShopGeoJson from '~/models/shop-geo-json'
 import Area from '~/models/area'
 
@@ -27,24 +26,22 @@ export default class AreaGoogleMap extends Vue {
   }
 
   initializeMap () {
+    const loader = new Loader({
+      apiKey: this.apiKey
+    }as LoaderOptions)
+
     const mapOptions = {
       center: { lat: this.area.lat, lng: this.area.lng },
       zoom: this.area.zoom
-    } as google.maps.MapOptions
+    }
 
-    const mapLoaderOptions = {
-      apiKey: this.apiKey,
-      divId: 'map',
-      append: false,
-      mapOptions
-    } as MapLoaderOptions
-    const mapLoader = new GoogleMap()
-    mapLoader.initMap(mapLoaderOptions)
-      .then((googleMap) => {
-        // TODO: geojsonで投入したpointのアイコン
-        // 表示
-        // クリックイベント
+    loader.load()
+      .then(() => {
+        // @ts-ignore
+        // eslint-disable-next-line no-undef
+        const googleMap = new google.maps.Map(document.getElementById('map'), mapOptions)
         googleMap.data.addGeoJson(this.geoJson)
+        // TODO: クリックイベントで詳細のModalを表示
       })
   }
 }

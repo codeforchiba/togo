@@ -14,7 +14,7 @@
     "server": "http-server ./dist -p 8080"
   },
   "dependencies": {
-    "@googlemaps/map-loader": "^1.0.1",
+    "@googlemaps/js-api-loader": "^1.0.0",
     "@nuxt/typescript-runtime": "^0.4.6",
     "@nuxtjs/axios": "^5.10.1",
     "@nuxtjs/gtm": "^2.2.3",
