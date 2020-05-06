@@ -10,6 +10,7 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "lint-fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
     "server": "http-server ./dist -p 8080"
   },
   "dependencies": {
