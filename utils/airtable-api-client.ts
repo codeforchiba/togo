@@ -31,7 +31,9 @@ class AirtableApiClient {
       coverImagePath: coverImage ? coverImage.url : undefined,
       pictures: pictures ? pictures.map(a => a.url) : undefined,
       menus: record.fields.Menus as string,
-      notes: record.fields.Notes as string
+      notes: record.fields.Notes as string,
+      lat: record.fields.Lat as number,
+      lng: record.fields.Lng as number
     })
   }
 
