@@ -8,7 +8,9 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <area-google-map :api-key="apiKey" :area="area" />
+        <client-only>
+          <area-google-map :api-key="apiKey" :area="area" />
+        </client-only>
       </v-col>
     </v-row>
     <v-row>
