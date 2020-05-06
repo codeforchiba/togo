@@ -13,7 +13,7 @@ const preloadModule: Module = function () {
 
     const areas: Array<Area> = await Promise.all(data.map(async (a: any) => {
       const shops = await client.retrieve(a.name)
-      return { id: a.id, name: a.name, shops }
+      return { id: a.id, name: a.name, zoom: a.zoom, lat: a.lat, lng: a.lng, shops }
     }))
 
     fse.writeJSONSync('./data/shop.json', areas)
