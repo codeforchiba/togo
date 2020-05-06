@@ -30,6 +30,7 @@
 import { Component } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
 import Vue from 'vue'
+import { sortBy } from 'lodash'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
@@ -46,16 +47,12 @@ export default class Index extends Vue {
   apiKey!: String
   area!: Area
 
-  get logoPath () {
-    return require('~/assets/images/logo.jpg')
-  }
-
   get name () {
     return this.area.name
   }
 
   get shops () {
-    return this.area.shops
+    return sortBy(this.area.shops, s => s.official)
   }
 
   async asyncData (context: Context): Promise<object> {
@@ -87,6 +84,7 @@ export default class Index extends Vue {
     return {
       title: this.name,
       meta: [
+        { hid: 'og:title', property: 'og:title', content: `お家で食べよう in ${this.name} powered by Code for Chiba` },
         { hid: 'og:image', property: 'og:image', content: `${process.env.baseUrl}/ogp_${this.area.id}.jpg` }
       ]
     }

@@ -1,9 +1,13 @@
 [
   { "id": "kaihinmakuhari", "name": "海浜幕張" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
+  { "id": "makuhari", "name": "幕張" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
   { "id": "kemigawahama", "name": "検見川浜" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
   { "id": "kemigawa", "name": "検見川" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
   { "id": "inagekaigan", "name": "稲毛海岸" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
   { "id": "chibaminato", "name": "千葉みなと" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
   { "id": "nishichiba", "name": "西千葉" , "zoom": 14, "lat": 35.648976, "lng": 140.043184},
-  { "id": "chiba", "name": "千葉", "zoom": 14, "lat": 35.648976, "lng": 140.043184 }
+  { "id": "chiba", "name": "千葉", "zoom": 14, "lat": 35.648976, "lng": 140.043184 },
+  { "id": "mitsuwadai", "name": "みつわ台" , "zoom": 14, "lat": 35.648976, "lng": 140.043184 },
+  { "id": "makuharihongo", "name": "幕張本郷", "zoom": 14, "lat": 35.648976, "lng": 140.043184 },
+  { "id": "inage", "name": "稲毛" , "zoom": 14, "lat": 35.648976, "lng": 140.043184 }
 ]

@@ -10,6 +10,19 @@
     </client-only>
     <v-row class="mt-5 pb-5 red lighten-5">
       <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        当サイトについて
+      </v-col>
+      <v-col cols="12" class="text-left text-md-center">
+        <p>
+          テイクアウトに対応しているお店を知ることができるサイトです。営業時間やメニューもテイクアウトに対応しているものを掲載するようにしております。
+        </p>
+        <p>
+          お店の情報はエリアごとに分けて掲載しております。是非、お近くのお店にて購入し、お家でお楽しみください。
+        </p>
+      </v-col>
+    </v-row>
+    <v-row class="pb-5 red lighten-4">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
         掲載を希望する飲食店の皆様へ
       </v-col>
       <v-col cols="12" class="text-left text-md-center">
@@ -21,8 +34,26 @@
         </p>
       </v-col>
       <v-col class="text-center py-5">
-        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" :href="formUrl" target="_blank">
+        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" :href="shopFormUrl" target="_blank">
           掲載依頼フォームを開く
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row class="pb-5 red lighten-5">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        地域の皆様へ
+      </v-col>
+      <v-col cols="12" class="text-left text-md-center">
+        <p>
+          地域でがんばっているお店の情報をご提供ください。日々変わる状況の中、情報の告知等に苦労されているかと思います。是非、ご近所のお店の情報を共有ください。
+        </p>
+        <p>
+          入力いただいた情報は、内容確認後、順次掲載させていただきます。
+        </p>
+      </v-col>
+      <v-col class="text-center py-5">
+        <v-btn tile x-large color="red accent-2 white--text font-weight-bold" :href="requestFormUrl" target="_blank">
+          お店情報提供フォームを開く
         </v-btn>
       </v-col>
     </v-row>
@@ -84,7 +115,9 @@ export default class Index extends Vue {
 
   title: string = 'お家で食べよう in 千葉 powered by Code for Chiba'
 
-  formUrl: string = 'https://forms.gle/uQ5q8ecqPohBUkqu5'
+  shopFormUrl: string = 'https://forms.gle/uQ5q8ecqPohBUkqu5'
+
+  requestFormUrl: string = 'https://forms.gle/11DFHppJfQNFwshs6'
 
   get cfcLogoPath () {
     return require('~/assets/images/cfc-with-text.png')
