@@ -10,13 +10,11 @@ import Vue from 'vue'
 import { GoogleMap } from '@googlemaps/map-loader'
 import { Component, Prop } from 'nuxt-property-decorator'
 import { MapLoaderOptions } from '@googlemaps/map-loader/src/map-loader'
-import Shop from '~/models/shop'
 import ShopGeoJson from '~/models/shop-geo-json'
 import Area from '~/models/area'
 
 @Component
 export default class AreaGoogleMap extends Vue {
-  @Prop({ required: true }) readonly shops!: ReadonlyArray<Shop>
   @Prop({ required: true }) readonly area!: Area
   @Prop({ required: true }) readonly apiKey!: String
 
@@ -25,7 +23,7 @@ export default class AreaGoogleMap extends Vue {
   }
 
   get geoJson (): ShopGeoJson {
-    return new ShopGeoJson(this.shops)
+    return new ShopGeoJson(this.area.shops)
   }
 
   initializeMap () {

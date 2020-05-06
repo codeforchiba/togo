@@ -8,7 +8,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <area-google-map :shops="shops" :api-key="apiKey" :area="area" />
+        <area-google-map :api-key="apiKey" :area="area" />
       </v-col>
     </v-row>
     <v-row>
@@ -33,7 +33,6 @@ import Vue from 'vue'
 
 import { areaStore } from '~/store'
 import Area from '~/models/area'
-import Shop from '~/models/shop'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
 import AreaGoogleMap from '~/components/area-google-map.vue'
@@ -68,7 +67,14 @@ export default class Index extends Vue {
 
       // @ts-ignore
       const shops = await context.app.$dataApi.retrieve(areaData.name)
-      const area: Area = { id: areaData!.id, name: areaData!.name, shops }
+      const area: Area = {
+        id: areaData!.id,
+        name: areaData!.name,
+        zoom: areaData!.zoom,
+        lat: areaData!.lat,
+        lng: areaData!.lng,
+        shops
+      }
 
       return { apiKey, area }
     } else {
