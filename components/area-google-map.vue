@@ -18,7 +18,9 @@ export default class AreaGoogleMap extends Vue {
   @Prop({ required: true }) readonly apiKey!: String
 
   mounted () {
-    this.initializeMap()
+    this.$nextTick(() => {
+      this.initializeMap()
+    })
   }
 
   get geoJson (): ShopGeoJson {
