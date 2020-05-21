@@ -34,6 +34,9 @@ export default class AreaGoogleMap extends Vue {
       return { latitude: shop.lat, longitude: shop.lng } as GeolibInputCoordinates
     })
     const centerPoint = getCenter(poins)
+    if (!centerPoint) {
+      return { lat: 0, lng: 0 }
+    }
     return { lat: centerPoint.latitude, lng: centerPoint.longitude }
   }
 
