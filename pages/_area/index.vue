@@ -70,8 +70,6 @@ export default class Index extends Vue {
         id: areaData!.id,
         name: areaData!.name,
         zoom: areaData!.zoom,
-        lat: areaData!.lat,
-        lng: areaData!.lng,
         shops
       }
 
