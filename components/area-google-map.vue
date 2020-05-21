@@ -9,6 +9,8 @@
 import Vue from 'vue'
 import { Loader, LoaderOptions } from '@googlemaps/js-api-loader'
 import { Component, Prop } from 'nuxt-property-decorator'
+import getCenter from 'geolib/es/getCenter'
+import { GeolibInputCoordinates } from 'geolib/es/types'
 import ShopGeoJson from '~/models/shop-geo-json'
 import Area from '~/models/area'
 
@@ -27,13 +29,22 @@ export default class AreaGoogleMap extends Vue {
     return new ShopGeoJson(this.area.shops)
   }
 
+  get center () {
+    const poins = this.area.shops.map((shop) => {
+      return { latitude: shop.lat, longitude: shop.lng } as GeolibInputCoordinates
+    })
+    const centerPoint = getCenter(poins)
+    return { lat: centerPoint.latitude, lng: centerPoint.longitude }
+  }
+
   initializeMap () {
     const loader = new Loader({
       apiKey: this.apiKey
     }as LoaderOptions)
 
+    console.log(this.center)
     const mapOptions = {
-      center: { lat: this.area.lat, lng: this.area.lng },
+      center: this.center,
       zoom: this.area.zoom
     }
 

@@ -21,6 +21,7 @@
     "@types/geojson": "^7946.0.7",
     "@types/googlemaps": "^3.39.4",
     "airtable": "^0.8.1",
+    "geolib": "^3.2.1",
     "lodash": "^4.17.15",
     "nuxt": "^2.0.0",
     "nuxt-property-decorator": "^2.5.1"
