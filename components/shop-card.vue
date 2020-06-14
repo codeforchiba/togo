@@ -41,7 +41,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-card-actions>
-      <shop-dialog :shop="shop" />
+      <shop-dialog-with-btn :shop="shop" />
       <v-spacer />
       <v-btn v-if="url" icon :href="url" target="_blank">
         <v-icon>fas fa-globe</v-icon>
@@ -67,10 +67,10 @@ import Vue from 'vue'
 import { Component, Prop } from 'nuxt-property-decorator'
 
 import Shop from '~/models/shop'
-import ShopDialog from '~/components/shop-dialog.vue'
+import ShopDialogWithBtn from '~/components/shop-dialog-with-btn.vue'
 
 @Component({
-  components: { ShopDialog }
+  components: { ShopDialogWithBtn }
 })
 export default class ShopCard extends Vue {
   @Prop({ required: true })
