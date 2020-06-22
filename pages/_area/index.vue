@@ -7,6 +7,13 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="12">
+        <client-only>
+          <area-google-map :api-key="apiKey" :area="area" />
+        </client-only>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col v-for="shop in shops" :key="shop.name" cols="12" sm="4">
         <shop-card :shop="shop" />
       </v-col>
@@ -31,13 +38,15 @@ import { areaStore } from '~/store'
 import Area from '~/models/area'
 import Logo from '~/components/logo.vue'
 import ShopCard from '~/components/shop-card.vue'
+import AreaGoogleMap from '~/components/area-google-map.vue'
 
 import areaData from '~/data/shop.json'
 
 @Component({
-  components: { Logo, ShopCard }
+  components: { AreaGoogleMap, Logo, ShopCard }
 })
 export default class Index extends Vue {
+  apiKey!: String
   area!: Area
 
   get name () {
@@ -49,6 +58,7 @@ export default class Index extends Vue {
   }
 
   async asyncData (context: Context): Promise<object> {
+    const apiKey = context.env.googleMapsApiKey
     const areaCode = context.params.area
 
     if (context.isDev) {
@@ -56,12 +66,17 @@ export default class Index extends Vue {
 
       // @ts-ignore
       const shops = await context.app.$dataApi.retrieve(areaData.name)
-      const area: Area = { id: areaData!.id, name: areaData!.name, shops }
+      const area: Area = {
+        id: areaData!.id,
+        name: areaData!.name,
+        zoom: areaData!.zoom,
+        shops
+      }
 
-      return { area }
+      return { apiKey, area }
     } else {
       const area = areaData.find(a => a.id === areaCode)
-      return { area }
+      return { apiKey, area }
     }
   }
 

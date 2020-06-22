@@ -14,6 +14,8 @@ export default class Shop {
   readonly menus?: string
   readonly notes?: string
   readonly official?: boolean
+  readonly lng?: number
+  readonly lat?: number
 
   constructor (object?: Partial<Shop>) {
     Object.assign(this, object)

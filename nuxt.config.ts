@@ -90,7 +90,8 @@ const config: Configuration = {
   env: {
     dataApiKey: process.env.AIRTABLE_API_KEY,
     baseId: process.env.AIRTABLE_BASE_ID,
-    baseUrl: baseUrl
+    baseUrl: baseUrl,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY
   },
   typescript: {
     typeCheck: {

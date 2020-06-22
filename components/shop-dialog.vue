@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="open" :width="cardWidth" :fullscreen="mobile">
-      <template v-slot:activator="{ on }">
-        <v-btn text color="blue accent-2" v-on="on">
-          詳細
-        </v-btn>
-      </template>
+    <v-dialog :value="open" :width="cardWidth" :fullscreen="mobile" @input="updateOpen">
       <v-card>
         <v-img :src="coverImagePath" height="300px">
           <template v-slot:placeholder>
@@ -128,100 +123,107 @@ import Vue from 'vue'
 import Shop from '~/models/shop'
 
 @Component
-export default class ShopDialog extends Vue {
-  @Prop({ required: true })
-  shop!: Shop
+export default class ShopDialogWithBtn extends Vue {
+    @Prop({ required: true })
+    shop!: Shop
 
-  open: boolean = false
+    @Prop({ required: true })
+    open!: boolean
 
-  openImage: boolean = false
+    openImage: boolean = false
 
-  currentSource: string = ''
+    currentSource: string = ''
 
-  get name () {
-    return this.shop.name
-  }
-
-  get address () {
-    return this.shop.address
-  }
-
-  get businessHours () {
-    return this.nl2br(this.shop.businessHours)
-  }
-
-  get phone () {
-    return this.shop.phone
-  }
-
-  get url () {
-    return this.shop.url
-  }
-
-  get facebook () {
-    return this.shop.facebook ? `https://facebook.com/${this.shop.facebook}` : undefined
-  }
-
-  get twitter () {
-    return this.shop.twitter ? `https://twitter.com/${this.shop.twitter}` : undefined
-  }
-
-  get instagram () {
-    return this.shop.instagram ? `https://www.instagram.com/${this.shop.instagram}` : undefined
-  }
-
-  get line () {
-    return this.shop.line
-  }
-
-  get notes () {
-    return this.nl2br(this.shop.notes)
-  }
-
-  get menu () {
-    return this.nl2br(this.shop.menus)
-  }
-
-  get official () {
-    return this.shop.official
-  }
-
-  get coverImagePath () {
-    return this.shop.coverImagePath
-  }
-
-  get pictures () {
-    return this.shop.pictures
-  }
-
-  get cardWidth () {
-    return this.mobile ? undefined : 600
-  }
-
-  get imageWidth () {
-    return this.mobile ? undefined : 1000
-  }
-
-  get mobile () {
-    return this.$vuetify.breakpoint.xsOnly
-  }
-
-  @Watch('openImage')
-  onOpenImageDialog (value: boolean) {
-    if (value) {
-      Vue.nextTick(() => {
-        this.$vuetify.goTo(0, { duration: 0, container: '.image-dialog' })
-      })
+    get name () {
+      return this.shop.name
     }
-  }
 
-  openImageDialog (source: string) {
-    this.currentSource = source
-    this.openImage = true
-  }
+    get address () {
+      return this.shop.address
+    }
 
-  nl2br (content: string | undefined) {
-    return content ? content.replace(/\n/g, '<br/>') : undefined
-  }
+    get businessHours () {
+      return this.nl2br(this.shop.businessHours)
+    }
+
+    get phone () {
+      return this.shop.phone
+    }
+
+    get url () {
+      return this.shop.url
+    }
+
+    get facebook () {
+      return this.shop.facebook ? `https://facebook.com/${this.shop.facebook}` : undefined
+    }
+
+    get twitter () {
+      return this.shop.twitter ? `https://twitter.com/${this.shop.twitter}` : undefined
+    }
+
+    get instagram () {
+      return this.shop.instagram ? `https://www.instagram.com/${this.shop.instagram}` : undefined
+    }
+
+    get line () {
+      return this.shop.line
+    }
+
+    get notes () {
+      return this.nl2br(this.shop.notes)
+    }
+
+    get menu () {
+      return this.nl2br(this.shop.menus)
+    }
+
+    get official () {
+      return this.shop.official
+    }
+
+    get coverImagePath () {
+      return this.shop.coverImagePath
+    }
+
+    get pictures () {
+      return this.shop.pictures
+    }
+
+    get cardWidth () {
+      return this.mobile ? undefined : 600
+    }
+
+    get imageWidth () {
+      return this.mobile ? undefined : 1000
+    }
+
+    get mobile () {
+      return this.$vuetify.breakpoint.xsOnly
+    }
+
+    @Watch('openImage')
+    onOpenImageDialog (value: boolean) {
+      if (value) {
+        Vue.nextTick(() => {
+          this.$vuetify.goTo(0, { duration: 0, container: '.image-dialog' })
+        })
+      }
+    }
+
+    openImageDialog (source: string) {
+      this.currentSource = source
+      this.openImage = true
+    }
+
+    nl2br (content: string | undefined) {
+      return content ? content.replace(/\n/g, '<br/>') : undefined
+    }
+
+    updateOpen (event: Event): void {
+      if (event.target instanceof HTMLInputElement) {
+        this.$emit('update:open', event.target.value)
+      }
+    }
 }
 </script>
