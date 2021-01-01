@@ -1,6 +1,19 @@
 <template>
   <v-container fluid>
     <logo />
+    <v-row class="mt-5 pb-5" justify="center">
+      <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
+        <p>サービス終了のお知らせ</p>
+      </v-col>
+      <v-col cols="12" sm="12" md="10" class="text-left">
+        <p>
+          2020年4月より運営してまいりました「おうちで食べようin千葉」ですが、サービスの利用状況を鑑みて、2021年1月31日（日）をもちまして、サービスを終了させていただくこととなりました。
+        </p>
+        <p>
+          いままで「おうちで食べようin千葉」をご利用いただき、誠にありがとうございます。引き続き、NPO法人 Code for Chibaのサービスを利用いただけますことを心よりお待ち申し上げます。
+        </p>
+      </v-col>
+    </v-row>
     <client-only>
       <v-row class="mt-5 pb-5" justify="center">
         <v-col v-for="a in records" :key="a.id" cols="12" sm="6" md="5" class="mb-5">
