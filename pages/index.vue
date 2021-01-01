@@ -1,11 +1,11 @@
 <template>
   <v-container fluid>
     <logo />
-    <v-row class="mt-5 pb-5">
+    <v-row class="mt-5 pb-5" justify="center">
       <v-col cols="12" class="my-5 headline text-center font-weight-bold" tag="h2">
         <p>サービス終了のお知らせ</p>
       </v-col>
-      <v-col cols="12" class="text-left text-md-center">
+      <v-col cols="12" sm="12" md="10" class="text-left">
         <p>
           2020年4月より運営してまいりました「おうちで食べようin千葉」ですが、サービスの利用状況を鑑みて、2021年1月31日（日）をもちまして、サービスを終了させていただくこととなりました。
         </p>
